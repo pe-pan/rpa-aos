@@ -19,6 +19,8 @@ flow:
           for: row in items.splitlines()
           do:
             AOS.product.purchase.ui.buy_item:
+              - host: host
+              - user: user
               - url
               - username: '${row.split()[0]}'
               - password
@@ -39,7 +41,7 @@ extensions:
         x: 101
         'y': 112
       buy_item:
-        x: 249
+        x: 250
         'y': 117
         navigate:
           6eafe5eb-950e-eddd-d5a2-1c85c4b4db2a:
