@@ -58,11 +58,11 @@ extensions:
       Get_Cell:
         x: 91
         'y': 121
-      insert_aos_user:
-        x: 259
-        'y': 121
+      insert_user:
+        x: 248
+        'y': 117
         navigate:
-          5b283733-9b31-7dae-fd56-5443bcae756a:
+          52a148d6-6505-ed71-615a-a71ecbb47a8a:
             targetId: ec2a89c7-51c9-ca9a-485c-31be1b90bf2d
             port: SUCCESS
     results:
