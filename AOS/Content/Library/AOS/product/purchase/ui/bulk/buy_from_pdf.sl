@@ -1,11 +1,39 @@
 namespace: AOS.product.purchase.ui.bulk
 flow:
   name: buy_from_pdf
+  inputs:
+    - excel_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\AOS-shopping-list.xlsx"
+    - users_sheet: Users
+    - pdf_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\shopping_list.pdf"
+    - login_header: Username
+    - password_header: Password
   workflow:
+    - get_users:
+        do_external:
+          5060d8cc-d03c-43fe-946f-7babaaec589f:
+            - excelFileName: '${excel_path}'
+            - worksheetName: '${users_sheet}'
+            - hasHeader: 'yes'
+            - firstRowIndex: '0'
+            - rowIndex: '0:1000'
+            - columnIndex: '0:100'
+            - rowDelimiter: '|'
+            - columnDelimiter: ','
+            - login_header: '${login_header}'
+            - password_header: '${password_header}'
+        publish:
+          - data: '${returnResult}'
+          - header
+          - login_index: '${str(header.split(",").index(login_header))}'
+          - password_index: '${str(header.split(",").index(password_header))}'
+          - map: '${str({row.split(",")[int(login_index)]: row.split(",")[int(password_index)] for row in data.split("|")})}'
+        navigate:
+          - failure: on_failure
+          - success: extract_text_from_pdf
     - extract_text_from_pdf:
         do:
           io.cloudslang.tesseract.ocr.extract_text_from_pdf:
-            - file_path: "C:\\Enablement\\exercises\\AOS\\shopping_list.pdf"
+            - file_path: '${pdf_path}'
             - data_path: "C:\\Enablement\\tessdata"
             - language: ENG
         publish:
@@ -15,19 +43,15 @@ flow:
           - SUCCESS: buy_item
           - FAILURE: on_failure
     - buy_item:
-        loop:
+        parallel_loop:
           for: row in items.splitlines()
           do:
             AOS.product.purchase.ui.buy_item:
-              - host: host
-              - user: user
-              - url
+              - url: "${get_sp('aos_url')}"
               - username: '${row.split()[0]}'
-              - password
+              - password: '${eval(map).get(username)}'
               - catalog: '${row.split()[1]}'
               - item: '${row.split(None, 2)[2]}'
-          break:
-            - FAILURE
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
@@ -38,17 +62,20 @@ extensions:
   graph:
     steps:
       extract_text_from_pdf:
-        x: 101
-        'y': 112
+        x: 79
+        'y': 300
       buy_item:
-        x: 250
-        'y': 117
+        x: 285
+        'y': 301
         navigate:
           6eafe5eb-950e-eddd-d5a2-1c85c4b4db2a:
             targetId: ff55bf25-70df-c554-74e2-9c9de2b4bb73
             port: SUCCESS
+      get_users:
+        x: 81
+        'y': 145
     results:
       SUCCESS:
         ff55bf25-70df-c554-74e2-9c9de2b4bb73:
-          x: 435
-          'y': 120
+          x: 273
+          'y': 131

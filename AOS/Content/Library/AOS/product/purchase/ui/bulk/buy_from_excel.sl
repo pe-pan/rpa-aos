@@ -2,7 +2,7 @@ namespace: AOS.product.purchase.ui.bulk
 flow:
   name: buy_from_excel
   inputs:
-    - excel_path: "C:\\\\Users\\\\Administrator\\\\Desktop\\\\AOS-shopping-list.xlsx"
+    - excel_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\AOS-shopping-list.xlsx"
     - users_sheet: Users
     - items_sheet: Shopping List
     - login_header: Username
@@ -56,19 +56,17 @@ flow:
           - failure: on_failure
           - success: buy_item
     - buy_item:
-        loop:
+        parallel_loop:
           for: 'row in data.split("|")'
           do:
             AOS.product.purchase.ui.buy_item:
               - url: "${get_sp('aos_url')}"
               - username: '${row.split(",")[int(login_index)]}'
-              - host: localhost
-              - user: '${row.split(",")[int(login_index)]}'
-              - password: '${eval(map).get(user)}'
+              - password: '${eval(map).get(username)}'
               - catalog: '${row.split(",")[int(catalog_index)]}'
               - item: '${row.split(",")[int(item_index)]}'
-          break:
-            - FAILURE
+        publish:
+          - price_list: '${str([str(x["price"]) for x in branches_context])}'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
