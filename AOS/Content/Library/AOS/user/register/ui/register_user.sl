@@ -9,7 +9,7 @@ flow:
     - last_name: Crisan
     - email: d.c@mf.com
   workflow:
-    - register_user:
+    - register_user_act:
         do:
           AOS.user.register.ui.register_user_act:
             - url: '${url}'
@@ -34,7 +34,7 @@ flow:
 extensions:
   graph:
     steps:
-      register_user:
+      register_user_act:
         x: 100
         'y': 150
         navigate:
