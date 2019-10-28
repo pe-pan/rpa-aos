@@ -60,6 +60,8 @@ flow:
           for: 'row in data.split("|")'
           do:
             AOS.product.purchase.ui.buy_item:
+              - url: "${get_sp('aos_url')}"
+              - username: '${row.split(",")[int(login_index)]}'
               - host: localhost
               - user: '${row.split(",")[int(login_index)]}'
               - password: '${eval(map).get(user)}'

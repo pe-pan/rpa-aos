@@ -6,3 +6,4 @@ properties:
       value: admin
       sensitive: true
   - worksheet: products
+  - aos_url: 'http://rpa.mf-te.com:8080'

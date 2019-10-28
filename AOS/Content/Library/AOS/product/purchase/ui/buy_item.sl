@@ -2,42 +2,42 @@ namespace: AOS.product.purchase.ui
 flow:
   name: buy_item
   inputs:
-    - host
-    - user
-    - password
+    - url:
+        required: false
+    - username
+    - password:
+        sensitive: true
     - catalog
     - item
   workflow:
-    - buy_item_act:
+    - buy_item_uft:
         do:
-          AOS.product.purchase.ui.buy_item_act:
-            - host: '${host}'
-            - user: '${user}'
+          AOS.product.purchase.ui.buy_item_uft:
+            - url: "${get('url', get_sp('aos_url'))}"
+            - username: '${username}'
             - password: '${password}'
             - catalog: '${catalog}'
             - item: '${item}'
-        publish:
-          - total_price
         navigate:
           - SUCCESS: SUCCESS
           - WARNING: SUCCESS
           - FAILURE: on_failure
   outputs:
-    - total_price: '${total_price}'
+    - price: '${price}'
   results:
-    - FAILURE
     - SUCCESS
+    - FAILURE
 extensions:
   graph:
     steps:
-      buy_item_act:
-        x: 231
-        'y': 139
+      buy_item_uft:
+        x: 235
+        'y': 133
         navigate:
-          3f4552ea-c3ed-b447-a985-85c7f7dd3d62:
+          47e9b274-239c-4b8b-8c27-00e9ff62adec:
             targetId: ca414f4e-8322-f716-4bb3-2ad1031064dc
             port: SUCCESS
-          0f77e4d7-9266-3eaa-a6c6-cfadb0a380c9:
+          98cd0e9d-5abd-1557-6883-e575b74a1ca0:
             targetId: ca414f4e-8322-f716-4bb3-2ad1031064dc
             port: WARNING
     results:
