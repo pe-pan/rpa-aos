@@ -1,6 +1,6 @@
 namespace: AOS.user.remove.db.bulk
 flow:
-  name: remove_users
+  name: remove_users_from_excel
   inputs:
     - excel_path: "C:\\\\Users\\\\Administrator\\\\Desktop\\\\AOS-shopping-list.xlsx"
     - sheet: Users
