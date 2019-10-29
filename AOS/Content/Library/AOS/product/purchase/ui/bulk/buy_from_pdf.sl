@@ -52,6 +52,9 @@ flow:
               - password: '${eval(map).get(username)}'
               - catalog: '${row.split()[1]}'
               - item: '${row.split(None, 2)[2]}'
+        publish:
+          - price: '${str(branches_context[0]["price"])}'
+          - price_list: '${str([str(x["price"]) for x in branches_context])}'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
@@ -61,6 +64,9 @@ flow:
 extensions:
   graph:
     steps:
+      get_users:
+        x: 81
+        'y': 145
       extract_text_from_pdf:
         x: 79
         'y': 300
@@ -71,9 +77,6 @@ extensions:
           6eafe5eb-950e-eddd-d5a2-1c85c4b4db2a:
             targetId: ff55bf25-70df-c554-74e2-9c9de2b4bb73
             port: SUCCESS
-      get_users:
-        x: 81
-        'y': 145
     results:
       SUCCESS:
         ff55bf25-70df-c554-74e2-9c9de2b4bb73:

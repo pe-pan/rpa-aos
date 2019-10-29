@@ -18,6 +18,8 @@ flow:
             - password: '${password}'
             - catalog: '${catalog}'
             - item: '${item}'
+        publish:
+          - price
         navigate:
           - SUCCESS: SUCCESS
           - WARNING: SUCCESS

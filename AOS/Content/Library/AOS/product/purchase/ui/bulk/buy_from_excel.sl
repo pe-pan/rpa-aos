@@ -66,6 +66,7 @@ flow:
               - catalog: '${row.split(",")[int(catalog_index)]}'
               - item: '${row.split(",")[int(item_index)]}'
         publish:
+          - price: '${str(branches_context[0]["price"])}'
           - price_list: '${str([str(x["price"]) for x in branches_context])}'
         navigate:
           - FAILURE: on_failure
