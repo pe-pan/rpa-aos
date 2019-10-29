@@ -33,7 +33,7 @@ flow:
           4552e495-4595-4916-b58b-ce521bdb1e9a:
             - excelFileName: '${file_path}'
             - worksheetName: "${get_sp('worksheet')}"
-            - headerData: "${'Category ID,Category Name,Product ID,Product Name,Product Price'+','.join(['Color Code'] * 6)}"
+            - headerData: "${'Category ID,Category Name,Product ID,Product Name,Product Price,'+','.join(['Color Code'] * 8)}"
             - rowData: "${category_id+','+category_name+','+product_id+','+product_name+','+product_price+','+color_codes}"
             - columnDelimiter: ','
             - rowsDelimiter: '|'
@@ -89,12 +89,6 @@ extensions:
           677bae73-735c-9801-d27c-4c48b9c4d5e7:
             targetId: cb52b646-9ed7-ddb6-39f3-1181bddd212c
             port: success
-      is_excel:
-        x: 305
-        'y': 85
-      get_color_codes:
-        x: 280
-        'y': 274
       add_product:
         x: 431
         'y': 262
@@ -102,6 +96,12 @@ extensions:
           62d55fa1-0b87-71e0-44bb-3aa5cdc662bf:
             targetId: cb52b646-9ed7-ddb6-39f3-1181bddd212c
             port: SUCCESS
+      is_excel:
+        x: 305
+        'y': 85
+      get_color_codes:
+        x: 280
+        'y': 274
     results:
       SUCCESS:
         cb52b646-9ed7-ddb6-39f3-1181bddd212c:
