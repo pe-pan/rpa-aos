@@ -2,9 +2,11 @@ namespace: AOS.product.purchase.api
 flow:
   name: add_product_to_cart
   inputs:
-    - url: 'http://localhost:8080'
+    - url: 'http://rpa.mf-te.com:8080'
     - username: joe.doe
-    - password: Cloud@joe1
+    - password:
+        default: Cloud@joe1
+        sensitive: true
     - product_id: '29'
     - color_code: '414141'
   workflow:

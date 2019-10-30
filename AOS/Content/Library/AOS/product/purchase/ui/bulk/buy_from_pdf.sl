@@ -2,9 +2,9 @@ namespace: AOS.product.purchase.ui.bulk
 flow:
   name: buy_from_pdf
   inputs:
-    - excel_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\AOS-shopping-list.xlsx"
+    - excel_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\shopping_list.xlsx"
     - users_sheet: Users
-    - pdf_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\shopping_list.pdf"
+    - pdf_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\shopping_list_letter.pdf"
     - login_header: Username
     - password_header: Password
   workflow:

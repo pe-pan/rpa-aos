@@ -2,7 +2,7 @@ namespace: AOS.product.list.api
 flow:
   name: get_products
   inputs:
-    - aos_url: 'http://localhost:8080'
+    - aos_url: 'http://rpa.mf-te.com:8080'
     - file_path: "c:\\\\temp\\\\products.txt"
   workflow:
     - http_client_get:
@@ -80,9 +80,9 @@ extensions:
       http_client_get:
         x: 75
         'y': 158
-      write_header:
-        x: 322
-        'y': 313
+      get_categories:
+        x: 460
+        'y': 159
       iterate_categories:
         x: 602
         'y': 154
@@ -90,18 +90,18 @@ extensions:
           7e079e4a-a61e-729f-2180-1169f387de57:
             targetId: d4fb690f-9a7d-8636-d260-4a6176a6973d
             port: SUCCESS
+      write_header:
+        x: 322
+        'y': 313
       is_excel:
         x: 248
         'y': 152
-      delete:
-        x: 268
-        'y': 20
       New_Excel_Document:
         x: 410
         'y': 14
-      get_categories:
-        x: 460
-        'y': 159
+      delete:
+        x: 268
+        'y': 20
     results:
       SUCCESS:
         d4fb690f-9a7d-8636-d260-4a6176a6973d:

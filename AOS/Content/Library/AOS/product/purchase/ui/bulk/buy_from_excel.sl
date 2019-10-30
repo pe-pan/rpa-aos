@@ -2,7 +2,7 @@ namespace: AOS.product.purchase.ui.bulk
 flow:
   name: buy_from_excel
   inputs:
-    - excel_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\AOS-shopping-list.xlsx"
+    - excel_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\shopping_list.xlsx"
     - users_sheet: Users
     - items_sheet: Shopping List
     - login_header: Username

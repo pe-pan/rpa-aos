@@ -2,7 +2,7 @@ namespace: AOS.user.remove.db.bulk
 flow:
   name: remove_users_from_excel
   inputs:
-    - excel_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\AOS-shopping-list.xlsx"
+    - excel_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\shopping_list.xlsx"
     - sheet: Users
     - login_header: Username
   workflow:
