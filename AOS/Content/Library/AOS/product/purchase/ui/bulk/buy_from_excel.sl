@@ -1,3 +1,8 @@
+########################################################################################################################
+#!!
+#! @description: Shops for items listed in an excel sheet. Each item can be purchased by a different user.
+#!!#
+########################################################################################################################
 namespace: AOS.product.purchase.ui.bulk
 flow:
   name: buy_from_excel

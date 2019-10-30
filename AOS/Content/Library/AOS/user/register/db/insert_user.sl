@@ -1,3 +1,8 @@
+########################################################################################################################
+#!!
+#! @description: Inserts a user directly to AOS DB. For DB details, refer to aos system properties.
+#!!#
+########################################################################################################################
 namespace: AOS.user.register.db
 flow:
   name: insert_user

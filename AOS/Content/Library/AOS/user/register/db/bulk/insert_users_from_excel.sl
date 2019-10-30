@@ -1,3 +1,8 @@
+########################################################################################################################
+#!!
+#! @description: Inserts users from an excel sheet directly to AOS DB. For DB details, refer to aos system properties.
+#!!#
+########################################################################################################################
 namespace: AOS.user.register.db.bulk
 flow:
   name: insert_users_from_excel

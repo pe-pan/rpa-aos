@@ -1,3 +1,8 @@
+########################################################################################################################
+#!!
+#! @description: Register a user using AOS UI. For AOS details, refer to aos system properties.
+#!!#
+########################################################################################################################
 namespace: AOS.user.register.ui
 operation:
   name: register_user_act

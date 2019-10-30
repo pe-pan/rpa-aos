@@ -1,4 +1,9 @@
-namespace: AOS.user.register.db.sub_flows 
+########################################################################################################################
+#!!
+#! @description: Calculates sha1 hash using python library.
+#!!#
+########################################################################################################################
+namespace: AOS.user.register.db.sub_flows
 operation:
   name: sha1
   inputs:

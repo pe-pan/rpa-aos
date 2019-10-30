@@ -1,3 +1,8 @@
+########################################################################################################################
+#!!
+#! @description: Register users from an excel sheet using AOS UI. For AOS details, refer to aos system properties.
+#!!#
+########################################################################################################################
 namespace: AOS.user.register.ui.bulk
 flow:
   name: register_users_from_excel

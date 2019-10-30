@@ -1,3 +1,8 @@
+########################################################################################################################
+#!!
+#! @description: Shops for items listed in a pdf file. Each item can be purchased by a different user (their passwords listed in an excel sheet).
+#!!#
+########################################################################################################################
 namespace: AOS.product.purchase.ui.bulk
 flow:
   name: buy_from_pdf

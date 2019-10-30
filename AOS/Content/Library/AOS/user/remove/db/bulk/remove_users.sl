@@ -1,5 +1,7 @@
 ########################################################################################################################
 #!!
+#! @description: Removes given users directly from AOS DB.  For AOS DB details, refer to aos system properties.
+#!
 #! @input login_name_list: Each item in the list must be enclosed in quotes
 #!!#
 ########################################################################################################################
@@ -69,6 +71,9 @@ flow:
 extensions:
   graph:
     steps:
+      is_enclosed_with_brackets:
+        x: 95
+        'y': 104
       delete_shippingaddress:
         x: 275
         'y': 120
@@ -82,9 +87,6 @@ extensions:
       enclose_with_brackets:
         x: 146
         'y': 300
-      is_enclosed_with_brackets:
-        x: 95
-        'y': 104
     results:
       SUCCESS:
         ec2a89c7-51c9-ca9a-485c-31be1b90bf2d:

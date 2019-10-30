@@ -1,3 +1,10 @@
+########################################################################################################################
+#!!
+#! @description: Reads the list of product items from AOS and persists the list into a text file or an excel sheet. It decides on the file_path extension; if being *.xls or *.xlsx, it saves to an excel sheet, otherwise to a text file.
+#!
+#! @input file_path: If *.xls or *.xlsx, it saves to an excel sheet; to a text file otherwise.
+#!!#
+########################################################################################################################
 namespace: AOS.product.list.api
 flow:
   name: get_products

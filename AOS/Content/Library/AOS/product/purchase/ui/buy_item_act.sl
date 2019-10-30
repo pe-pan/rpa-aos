@@ -1,3 +1,11 @@
+########################################################################################################################
+#!!
+#! @description: This activity was recorded in RPA 2019.11 but not finished as it does not support parametrization of links. This activity was "exported" to UFT and finalized in there. Refer to buy_item_uft activity instead.
+#!
+#! @input catalog: Is not used as RPA does not support link parametrization
+#! @input item: Is not used as RPA does not support link parametrization
+#!!#
+########################################################################################################################
 namespace: AOS.product.purchase.ui
 operation:
   name: buy_item_act

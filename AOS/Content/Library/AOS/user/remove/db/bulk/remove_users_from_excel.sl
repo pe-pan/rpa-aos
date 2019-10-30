@@ -1,3 +1,8 @@
+########################################################################################################################
+#!!
+#! @description: Removes users from an excel sheet directly from AOS DB.  For AOS DB details, refer to aos system properties.
+#!!#
+########################################################################################################################
 namespace: AOS.user.remove.db.bulk
 flow:
   name: remove_users_from_excel

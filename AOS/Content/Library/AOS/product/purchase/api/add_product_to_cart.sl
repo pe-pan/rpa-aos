@@ -1,3 +1,8 @@
+########################################################################################################################
+#!!
+#! @description: Adds the given product with the given color code into the shopping cart of the given user.
+#!!#
+########################################################################################################################
 namespace: AOS.product.purchase.api
 flow:
   name: add_product_to_cart
