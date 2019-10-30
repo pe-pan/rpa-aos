@@ -2,7 +2,7 @@ namespace: AOS.user.register.ui.bulk
 flow:
   name: register_users_from_excel
   inputs:
-    - excel_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\shopping-list.xlsx"
+    - excel_path: "C:\\\\Enablement\\\\HotLabs\\\\AOS\\\\shopping_list.xlsx"
     - sheet: Users
     - login_header: Username
     - password_header: Password
