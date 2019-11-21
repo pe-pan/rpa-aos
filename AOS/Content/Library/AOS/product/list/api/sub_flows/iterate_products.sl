@@ -12,7 +12,7 @@ flow:
         do:
           io.cloudslang.base.json.json_path_query:
             - json_object: '${json}'
-            - json_path: "${'$.*.products[?(@.productId == '+product_id+')].productName'}"
+            - json_path: "${'$.*.products[?(@.productId == %s)].productName' % product_id}"
         publish:
           - product_name: '${return_result[2:-2]}'
         navigate:
@@ -22,7 +22,7 @@ flow:
         do:
           io.cloudslang.base.json.json_path_query:
             - json_object: '${json}'
-            - json_path: "${'$.*.products[?(@.productId == '+product_id+')].price'}"
+            - json_path: "${'$.*.products[?(@.productId == %s)].price' % product_id}"
         publish:
           - product_price: '${return_result[1:-1]}'
         navigate:
@@ -34,7 +34,7 @@ flow:
             - excelFileName: '${file_path}'
             - worksheetName: "${get_sp('worksheet')}"
             - headerData: "${'Category ID,Category Name,Product ID,Product Name,Product Price,'+','.join(['Color Code'] * 8)}"
-            - rowData: "${category_id+','+category_name+','+product_id+','+product_name+','+product_price+','+color_codes}"
+            - rowData: "${','.join([category_id,category_name,product_id,product_name,product_price,color_codes])}"
             - columnDelimiter: ','
             - rowsDelimiter: '|'
             - rowIndex: ''
@@ -64,7 +64,7 @@ flow:
         do:
           io.cloudslang.base.json.json_path_query:
             - json_object: '${json}'
-            - json_path: "${'$.*.products[?(@.productId == '+product_id+')].colors.*.code'}"
+            - json_path: "${'$.*.products[?(@.productId == %s)].colors.*.code' % product_id}"
         publish:
           - color_codes: "${filter(lambda ch: ch not in '\"', return_result)[1:-1]}"
         navigate:

@@ -10,7 +10,7 @@ flow:
         do:
           io.cloudslang.base.json.json_path_query:
             - json_object: '${json}'
-            - json_path: '${"$[?(@.categoryId == "+category_id+")]"}'
+            - json_path: '${"$[?(@.categoryId == %s)]" % category_id}'
         publish:
           - category_json: '${return_result}'
         navigate:
