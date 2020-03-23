@@ -14,31 +14,25 @@ flow:
     - name_header: Full Name
     - email_header: Email
   workflow:
-    - Get_Cell:
-        do_external:
-          5060d8cc-d03c-43fe-946f-7babaaec589f:
-            - excelFileName: '${excel_path}'
-            - worksheetName: '${sheet}'
-            - hasHeader: 'yes'
-            - firstRowIndex: '0'
-            - rowIndex: '0:1000'
-            - columnIndex: '0:100'
-            - rowDelimiter: '|'
-            - columnDelimiter: ','
+    - get_cell:
+        do:
+          io.cloudslang.base.excel.get_cell:
+            - excel_file_name: '${excel_path}'
+            - worksheet_name: '${sheet}'
             - login_header: '${login_header}'
             - password_header: '${password_header}'
-            - email_header: '${email_header}'
             - name_header: '${name_header}'
+            - email_header: '${email_header}'
         publish:
-          - data: '${returnResult}'
+          - data: '${return_result}'
           - header
           - login_index: '${str(header.split(",").index(login_header))}'
           - password_index: '${str(header.split(",").index(password_header))}'
           - email_index: '${str(header.split(",").index(email_header))}'
           - name_index: '${str(header.split(",").index(name_header))}'
         navigate:
-          - failure: on_failure
-          - success: register_user
+          - SUCCESS: register_user
+          - FAILURE: on_failure
     - register_user:
         parallel_loop:
           for: 'row in data.split("|")'
@@ -59,9 +53,6 @@ flow:
 extensions:
   graph:
     steps:
-      Get_Cell:
-        x: 91
-        'y': 121
       register_user:
         x: 248
         'y': 117
@@ -69,6 +60,9 @@ extensions:
           4b48769f-9324-4da9-9ea8-9c94057c7b3b:
             targetId: ec2a89c7-51c9-ca9a-485c-31be1b90bf2d
             port: SUCCESS
+      get_cell:
+        x: 83
+        'y': 117
     results:
       SUCCESS:
         ec2a89c7-51c9-ca9a-485c-31be1b90bf2d:
