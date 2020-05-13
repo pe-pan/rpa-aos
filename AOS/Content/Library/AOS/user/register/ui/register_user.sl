@@ -26,11 +26,21 @@ flow:
         publish:
           - return_result
           - error_message
+          - created_user_name
+        navigate:
+          - SUCCESS: string_equals
+          - WARNING: string_equals
+          - FAILURE: on_failure
+    - string_equals:
+        do:
+          io.cloudslang.base.strings.string_equals:
+            - first_string: '${created_user_name}'
+            - second_string: '${username}'
         navigate:
           - SUCCESS: SUCCESS
-          - WARNING: SUCCESS
           - FAILURE: on_failure
   outputs:
+    - created_user_name: '${created_user_name}'
     - return_result
     - error_message
   results:
@@ -42,13 +52,13 @@ extensions:
       register_user_act:
         x: 100
         'y': 150
+      string_equals:
+        x: 272
+        'y': 308
         navigate:
-          daf2c825-6d82-2594-0461-be664688f559:
+          8a7640c8-6ed4-8d96-0123-a1a7e35e4cc6:
             targetId: 2a4d992d-9cc9-311d-5e19-f8c7bc8c710b
             port: SUCCESS
-          9a9525d3-e7f1-5f0e-8630-32e992e2356e:
-            targetId: 2a4d992d-9cc9-311d-5e19-f8c7bc8c710b
-            port: WARNING
     results:
       SUCCESS:
         2a4d992d-9cc9-311d-5e19-f8c7bc8c710b:
