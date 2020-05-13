@@ -17,7 +17,7 @@ operation:
     - catalog
     - item
   sequential_action:
-    gav: 'com.microfocus.seq:AOS.product.purchase.ui.buy_item_act:1.0.0'
+    gav: 'com.microfocus.seq:AOS.product.purchase.ui.buy_item_act:1.0.1'
     skills:
       - Java
       - SAP

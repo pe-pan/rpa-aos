@@ -8,7 +8,7 @@ operation:
     - catalog
     - item
   sequential_action:
-    gav: 'com.microfocus.seq:AOS.product.purchase.ui.buy_item_uft:1.0.0'
+    gav: 'com.microfocus.seq:AOS.product.purchase.ui.buy_item_uft:1.0.1'
     external: true
   outputs:
     - price:
