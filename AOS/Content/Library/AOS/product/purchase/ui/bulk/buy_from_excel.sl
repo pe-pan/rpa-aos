@@ -29,8 +29,8 @@ flow:
           - password_index: '${str(header.split(",").index(password_header))}'
           - map: '${str({row.split(",")[int(login_index)]: row.split(",")[int(password_index)] for row in data.split("|")})}'
         navigate:
-          - failure: on_failure
-          - success: get_items
+          - FAILURE: on_failure
+          - SUCCESS: get_items
     - get_items:
         do:
           io.cloudslang.base.excel.get_cell:
@@ -46,8 +46,8 @@ flow:
           - catalog_index: '${str(header.split(",").index(catalog_header))}'
           - item_index: '${str(header.split(",").index(item_header))}'
         navigate:
-          - failure: on_failure
-          - success: buy_item
+          - FAILURE: on_failure
+          - SUCCESS: buy_item
     - buy_item:
         parallel_loop:
           for: 'row in data.split("|")'

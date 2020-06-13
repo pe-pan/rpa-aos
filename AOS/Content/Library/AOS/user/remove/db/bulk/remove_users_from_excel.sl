@@ -11,7 +11,7 @@ flow:
     - sheet: Users
     - login_header: Username
   workflow:
-    - Get_Cell:
+    - get_cell:
         do:
           io.cloudslang.base.excel.get_cell:
             - excel_file_name: '${excel_path}'
@@ -22,8 +22,8 @@ flow:
           - header
           - login_name_list: '${str(tuple(str(row.split(",")[header.split(",").index(login_header)]) for row in data.split("|")))}'
         navigate:
-          - failure: on_failure
-          - success: remove_users
+          - FAILURE: on_failure
+          - SUCCESS: remove_users
     - remove_users:
         do:
           AOS.user.remove.db.bulk.remove_users:
@@ -41,7 +41,7 @@ flow:
 extensions:
   graph:
     steps:
-      Get_Cell:
+      get_cell:
         x: 64
         'y': 123
       remove_users:

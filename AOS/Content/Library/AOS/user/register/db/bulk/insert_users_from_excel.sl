@@ -31,8 +31,8 @@ flow:
           - email_index: '${str(header.split(",").index(email_header))}'
           - name_index: '${str(header.split(",").index(name_header))}'
         navigate:
-          - failure: on_failure
-          - success: insert_user
+          - FAILURE: on_failure
+          - SUCCESS: insert_user
     - insert_user:
         loop:
           for: 'row in data.split("|")'

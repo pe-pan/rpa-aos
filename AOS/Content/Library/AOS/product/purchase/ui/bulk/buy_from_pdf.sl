@@ -27,8 +27,8 @@ flow:
           - password_index: '${str(header.split(",").index(password_header))}'
           - map: '${str({row.split(",")[int(login_index)]: row.split(",")[int(password_index)] for row in data.split("|")})}'
         navigate:
-          - failure: on_failure
-          - success: extract_text_from_pdf
+          - FAILURE: on_failure
+          - SUCCESS: extract_text_from_pdf
     - extract_text_from_pdf:
         do:
           io.cloudslang.tesseract.ocr.extract_text_from_pdf:
