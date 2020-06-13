@@ -16,20 +16,14 @@ flow:
     - item_header: Item
   workflow:
     - get_users:
-        do_external:
-          5060d8cc-d03c-43fe-946f-7babaaec589f:
-            - excelFileName: '${excel_path}'
-            - worksheetName: '${users_sheet}'
-            - hasHeader: 'yes'
-            - firstRowIndex: '0'
-            - rowIndex: '0:1000'
-            - columnIndex: '0:100'
-            - rowDelimiter: '|'
-            - columnDelimiter: ','
+        do:
+          io.cloudslang.base.excel.get_cell:
+            - excel_file_name: '${excel_path}'
+            - worksheet_name: '${users_sheet}'
             - login_header: '${login_header}'
             - password_header: '${password_header}'
         publish:
-          - data: '${returnResult}'
+          - data: '${return_result}'
           - header
           - login_index: '${str(header.split(",").index(login_header))}'
           - password_index: '${str(header.split(",").index(password_header))}'
@@ -38,21 +32,15 @@ flow:
           - failure: on_failure
           - success: get_items
     - get_items:
-        do_external:
-          5060d8cc-d03c-43fe-946f-7babaaec589f:
-            - excelFileName: '${excel_path}'
-            - worksheetName: '${items_sheet}'
-            - hasHeader: 'yes'
-            - firstRowIndex: '0'
-            - rowIndex: '0:1000'
-            - columnIndex: '0:100'
-            - rowDelimiter: '|'
-            - columnDelimiter: ','
+        do:
+          io.cloudslang.base.excel.get_cell:
+            - excel_file_name: '${excel_path}'
+            - worksheet_name: '${items_sheet}'
             - login_header: '${login_header}'
             - catalog_header: '${catalog_header}'
             - item_header: '${item_header}'
         publish:
-          - data: '${returnResult}'
+          - data: '${return_result}'
           - header
           - login_index: '${str(header.split(",").index(login_header))}'
           - catalog_index: '${str(header.split(",").index(catalog_header))}'

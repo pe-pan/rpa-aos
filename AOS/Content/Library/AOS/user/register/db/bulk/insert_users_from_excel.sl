@@ -15,22 +15,16 @@ flow:
     - email_header: Email
   workflow:
     - Get_Cell:
-        do_external:
-          5060d8cc-d03c-43fe-946f-7babaaec589f:
-            - excelFileName: '${excel_path}'
-            - worksheetName: '${sheet}'
-            - hasHeader: 'yes'
-            - firstRowIndex: '0'
-            - rowIndex: '0:1000'
-            - columnIndex: '0:100'
-            - rowDelimiter: '|'
-            - columnDelimiter: ','
+        do:
+          io.cloudslang.base.excel.get_cell:
+            - excel_file_name: '${excel_path}'
+            - worksheet_name: '${sheet}'
             - login_header: '${login_header}'
             - password_header: '${password_header}'
             - email_header: '${email_header}'
             - name_header: '${name_header}'
         publish:
-          - data: '${returnResult}'
+          - data: '${return_result}'
           - header
           - login_index: '${str(header.split(",").index(login_header))}'
           - password_index: '${str(header.split(",").index(password_header))}'
