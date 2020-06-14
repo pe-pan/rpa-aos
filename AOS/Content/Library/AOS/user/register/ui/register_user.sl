@@ -15,18 +15,23 @@ flow:
     - email: d.c@mf.com
   workflow:
     - register_user_act:
-        do:
-          AOS.user.register.ui.register_user_act:
-            - url: '${url}'
-            - username: '${username}'
-            - password: '${password}'
-            - first_name: '${first_name}'
-            - last_name: '${last_name}'
-            - email: '${email}'
-        publish:
-          - return_result
-          - error_message
-          - created_user_name
+        loop:
+          for: retry in range(4)
+          do:
+            AOS.user.register.ui.register_user_act:
+              - url: '${url}'
+              - username: '${username}'
+              - password: '${password}'
+              - first_name: '${first_name}'
+              - last_name: '${last_name}'
+              - email: '${email}'
+          break:
+            - SUCCESS
+            - WARNING
+          publish:
+            - return_result
+            - error_message
+            - created_user_name
         navigate:
           - SUCCESS: string_equals
           - WARNING: string_equals
@@ -64,3 +69,4 @@ extensions:
         2a4d992d-9cc9-311d-5e19-f8c7bc8c710b:
           x: 400
           'y': 150
+
