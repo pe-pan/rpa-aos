@@ -24,6 +24,7 @@ operation:
         active: true
         address: '${url}'
         close_on_exit: true
+        browser: IE
     steps:
       - step:
           id: '1'
@@ -1822,8 +1823,8 @@ object_repository:
                             value: My account My orders Sign out
                             regular_expression: false
                           name: text
-                          hidden: false
-                          read_only: false
+                          hidden: true
+                          read_only: true
                           type: STRING
                       - property:
                           value:
@@ -1846,8 +1847,8 @@ object_repository:
                             value: menuUserLink
                             regular_expression: false
                           name: html id
-                          hidden: true
-                          read_only: true
+                          hidden: false
+                          read_only: false
                           type: STRING
                       - property:
                           value:
@@ -1882,8 +1883,8 @@ object_repository:
                       property_ref:
                         - micclass
                         - _xpath
-                        - text
                         - html tag
+                        - html id
                       ordinal_identifier: ''
                 - object:
                     smart_identification:
@@ -2102,7 +2103,6 @@ object_repository:
                     last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
                     basic_identification:
                       property_ref:
-                        - micclass
                         - _xpath
                         - text
                         - html tag
@@ -2427,3 +2427,4 @@ object_repository:
         type: Output
         class: VerifyObj
   parameters: []
+
