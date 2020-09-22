@@ -15,10 +15,10 @@ flow:
         do:
           io.cloudslang.base.utils.sleep:
             - seconds: '0'
-            - login_name_list: '${login_name_list}'
+            - login_name_list: '${login_name_list.strip()}'
         publish:
           - login_name_list_no_brackets: "${login_name_list[1:-1] if login_name_list.startswith('(') and login_name_list.endswith(')') else login_name_list}"
-          - login_name_list_quoted: "${str(tuple([x.strip().encode('ascii') for x in login_name_list_no_brackets.split(\",\")]))}"
+          - login_name_list_quoted: "${str(tuple([x.strip('\\t\\'\\\" ') for x in login_name_list_no_brackets.split(\",\")]))}"
         navigate:
           - SUCCESS: delete_shippingaddress
           - FAILURE: on_failure
@@ -82,4 +82,3 @@ extensions:
         ec2a89c7-51c9-ca9a-485c-31be1b90bf2d:
           x: 559
           'y': 110
-
