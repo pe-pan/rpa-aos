@@ -66,7 +66,7 @@ flow:
             - json_object: '${json}'
             - json_path: "${'$.*.products[?(@.productId == %s)].colors.*.code' % product_id}"
         publish:
-          - color_codes: "${filter(lambda ch: ch not in '\"', return_result)[1:-1]}"
+          - color_codes: "${','.join(eval(return_result))}"
         navigate:
           - SUCCESS: is_excel
           - FAILURE: on_failure
