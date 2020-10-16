@@ -16,15 +16,20 @@ flow:
     - item
   workflow:
     - buy_item_uft:
-        do:
-          AOS.product.purchase.ui.buy_item_uft:
-            - url: "${get('url', get_sp('aos_url'))}"
-            - username: '${username}'
-            - password: '${password}'
-            - catalog: '${catalog}'
-            - item: '${item}'
-        publish:
-          - price
+        loop:
+          for: attempts in range(5)
+          do:
+            AOS.product.purchase.ui.buy_item_act:
+              - url: "${get('url', get_sp('aos_url'))}"
+              - username: '${username}'
+              - password: '${password}'
+              - catalog: '${catalog}'
+              - item: '${item}'
+          break:
+            - SUCCESS
+            - WARNING
+          publish:
+            - price
         navigate:
           - SUCCESS: SUCCESS
           - WARNING: SUCCESS
@@ -52,3 +57,4 @@ extensions:
         ca414f4e-8322-f716-4bb3-2ad1031064dc:
           x: 453
           'y': 132
+
