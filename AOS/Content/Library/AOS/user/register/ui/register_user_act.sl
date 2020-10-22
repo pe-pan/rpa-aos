@@ -14,127 +14,166 @@ operation:
     - last_name
     - email
   sequential_action:
-    gav: 'com.microfocus.seq:AOS.user.register.ui.register_user_act:1.0.3'
+    gav: 'com.microfocus.seq:AOS.user.register.ui.register_user_act:1.0.0'
     skills:
       - Web
     settings:
       windows:
         active: false
       web:
-        active: true
-        address: '${url}'
-        close_on_exit: true
+        active: false
+        address: ''
         browser: IE
+        close_on_exit: true
     steps:
       - step:
           id: '1'
+          action: Script
+          object_path: 'browser_process = "iexplore.exe"'
+      - step:
+          id: '2'
+          object_path: SystemUtil
+          action: CloseProcessByName
+          args: browser_process
+      - step:
+          id: '3'
+          object_path: SystemUtil
+          action: Run
+          args: browser_process
+      - step:
+          id: '4'
+          object_path: 'Browser("Advantage Shopping")'
+          action: Navigate
+          args: 'Parameter("url")'
+      - step:
+          id: '5'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").Link("UserMenu")'
           action: Click
           snapshot: ".\\Snapshots\\ssf1.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").Link("UserMenu")'
       - step:
-          id: '2'
+          id: '6'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").Link("Link")'
           action: Click
           snapshot: ".\\Snapshots\\ssf2.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").Link("Link")'
       - step:
-          id: '3'
+          id: '7'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("usernameRegisterPage")'
           action: Set
-          default_args: '"joe.doe"'
+          args: 'Parameter("username")'
           snapshot: ".\\Snapshots\\ssf3.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("usernameRegisterPage")'
-          args: 'Parameter("username")'
       - step:
-          id: '4'
+          id: '8'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("emailRegisterPage")'
           action: Set
-          default_args: '"joe.doe@mf.com"'
+          args: 'Parameter("email")'
           snapshot: ".\\Snapshots\\ssf4.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("emailRegisterPage")'
-          args: 'Parameter("email")'
       - step:
-          id: '5'
+          id: '9'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebElement("Password")'
           action: Click
           snapshot: ".\\Snapshots\\ssf5.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebElement("Password")'
       - step:
-          id: '6'
+          id: '10'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("passwordRegisterPage")'
           action: SetSecure
-          default_args: '"Cloud1"'
+          args: 'Parameter("password")'
           snapshot: ".\\Snapshots\\ssf6.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("passwordRegisterPage")'
-          args: 'Parameter("password")'
       - step:
-          id: '7'
+          id: '11'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebElement("Confirm password")'
           action: Click
           snapshot: ".\\Snapshots\\ssf7.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebElement("Confirm password")'
       - step:
-          id: '8'
+          id: '12'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("confirm_passwordRegisterPage")'
           action: SetSecure
-          default_args: '"Cloud1"'
+          args: 'Parameter("password")'
           snapshot: ".\\Snapshots\\ssf8.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("confirm passwordRegisterPage")'
-          args: 'Parameter("password")'
       - step:
-          id: '9'
+          id: '13'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("first_nameRegisterPage")'
           action: Set
-          default_args: '"Joe"'
+          args: 'Parameter("first_name")'
           snapshot: ".\\Snapshots\\ssf9.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("first nameRegisterPage")'
-          args: 'Parameter("first_name")'
       - step:
-          id: '10'
+          id: '14'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("last_nameRegisterPage")'
           action: Set
-          default_args: '"Doe"'
+          args: 'Parameter("last_name")'
           snapshot: ".\\Snapshots\\ssf10.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebEdit("last nameRegisterPage")'
-          args: 'Parameter("last_name")'
       - step:
-          id: '11'
+          id: '15'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebCheckBox("allowOffersPromotion")'
           action: Set
-          default_args: '"OFF"'
+          args: '"OFF"'
           snapshot: ".\\Snapshots\\ssf11.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebCheckBox("allowOffersPromotion")'
       - step:
-          id: '12'
+          id: '16'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebCheckBox("i_agree")'
           action: Set
-          default_args: '"ON"'
+          args: '"ON"'
           snapshot: ".\\Snapshots\\ssf12.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebCheckBox("i agree")'
       - step:
-          id: '13'
+          id: '17'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebButton("register_btnundefined")'
           action: Click
           snapshot: ".\\Snapshots\\ssf13.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebButton("register btnundefined")'
       - step:
-          id: '14'
+          id: '18'
+          action: Script
+          object_path: For attempts = 1 To 10 Step 1
+      - step:
+          id: '19'
+          action: Script
+          object_path: 'If Not Browser("Advantage Shopping").Page("Advantage Shopping").WebElement("joe.doe").Exist(1) Then'
+      - step:
+          id: '20'
+          action: Wait
+          args: '"5"'
+          default_args: '"1"'
+      - step:
+          id: '21'
+          action: Script
+          object_path: End  If
+      - step:
+          id: '22'
+          action: Script
+          object_path: Next
+      - step:
+          id: '23'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").WebElement("joe.doe")'
           action: Output
-          default_args: 'CheckPoint("created_user_name")'
+          args: 'CheckPoint("created_user_name")'
       - step:
-          id: '15'
+          id: '24'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").Link("UserMenu_2")'
           action: Click
           snapshot: ".\\Snapshots\\ssf14.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").Link("UserMenu 2")'
       - step:
-          id: '16'
+          id: '25'
           object_path: 'Browser("Advantage Shopping").Page("Advantage Shopping").Link("Link_2")'
           action: Click
           snapshot: ".\\Snapshots\\ssf15.html"
           highlight_id: 'Browser("Advantage Shopping").Page("Advantage Shopping").Link("Link 2")'
+      - step:
+          id: '26'
+          object_path: SystemUtil
+          action: CloseProcessByName
+          args: browser_process
   outputs:
     - created_user_name:
         robot: true
@@ -274,7 +313,7 @@ object_repository:
                     custom_replay: ''
                     class: WebElement
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -376,7 +415,7 @@ object_repository:
                     custom_replay: ''
                     class: WebElement
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - html tag
@@ -477,7 +516,7 @@ object_repository:
                     custom_replay: ''
                     class: WebElement
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -615,7 +654,7 @@ object_repository:
                     custom_replay: ''
                     class: WebEdit
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -754,7 +793,7 @@ object_repository:
                     custom_replay: ''
                     class: WebEdit
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -893,7 +932,7 @@ object_repository:
                     custom_replay: ''
                     class: WebEdit
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -1032,7 +1071,7 @@ object_repository:
                     custom_replay: ''
                     class: WebEdit
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -1171,7 +1210,7 @@ object_repository:
                     custom_replay: ''
                     class: WebEdit
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -1310,7 +1349,7 @@ object_repository:
                     custom_replay: ''
                     class: WebEdit
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -1422,7 +1461,7 @@ object_repository:
                     custom_replay: ''
                     class: WebCheckBox
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -1534,7 +1573,7 @@ object_repository:
                     custom_replay: ''
                     class: WebCheckBox
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -1655,7 +1694,7 @@ object_repository:
                     custom_replay: ''
                     class: WebButton
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -1767,7 +1806,7 @@ object_repository:
                     custom_replay: ''
                     class: Link
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -1878,7 +1917,7 @@ object_repository:
                     custom_replay: ''
                     class: Link
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -1989,7 +2028,7 @@ object_repository:
                     custom_replay: ''
                     class: Link
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - micclass
@@ -2100,7 +2139,7 @@ object_repository:
                     custom_replay: ''
                     class: Link
                     visual_relations: ''
-                    last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+                    last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
                     basic_identification:
                       property_ref:
                         - _xpath
@@ -2208,7 +2247,7 @@ object_repository:
               custom_replay: ''
               class: Page
               visual_relations: ''
-              last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+              last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
               basic_identification:
                 property_ref:
                   - micclass
@@ -2306,7 +2345,7 @@ object_repository:
         custom_replay: ''
         class: Browser
         visual_relations: ''
-        last_update_time: 'Wednesday, May 13, 2020 10:08:20 AM'
+        last_update_time: 'Thursday, October 22, 2020 1:20:33 PM'
         basic_identification:
           property_ref:
             - micclass
@@ -2398,7 +2437,7 @@ object_repository:
             - value: ''
               visual_relations: ''
               parameter:
-                value: created_user_name
+                value: '"created_user_name"'
                 regular_expression: false
                 ignore_space: false
                 match_case: false
@@ -2427,4 +2466,3 @@ object_repository:
         type: Output
         class: VerifyObj
   parameters: []
-
