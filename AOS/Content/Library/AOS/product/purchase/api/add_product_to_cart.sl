@@ -19,6 +19,8 @@ flow:
         do:
           io.cloudslang.base.http.http_client_post:
             - url: "${url+'/accountservice/AccountLoginRequest'}"
+            - proxy_host: "${get_sp('aos_proxy_host')}"
+            - proxy_port: "${get_sp('aos_proxy_port')}"
             - body: "${'<?xml version=\"1.0\" encoding=\"UTF-8\"?><soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><soap:Body><AccountLoginRequest xmlns=\"com.advantage.online.store.accountservice\"><email></email><loginUser>%s</loginUser><loginPassword>%s</loginPassword></AccountLoginRequest></soap:Body></soap:Envelope>' % (username, password)}"
             - content_type: text/xml
         publish:
@@ -50,6 +52,8 @@ flow:
         do:
           io.cloudslang.base.http.http_client_post:
             - url: '${"%s/order/api/v1/carts/%s/product/%s/color/%s" % (url, user_id, product_id, color_code)}'
+            - proxy_host: "${get_sp('aos_proxy_host')}"
+            - proxy_port: "${get_sp('aos_proxy_port')}"
             - headers: '${"Authorization: Basic "+token}'
         publish:
           - cart_json: '${return_result}'

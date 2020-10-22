@@ -16,6 +16,8 @@ flow:
         do:
           io.cloudslang.base.http.http_client_get:
             - url: '${aos_url+"/catalog/api/v1/categories/all_data"}'
+            - proxy_host: "${get_sp('aos_proxy_host')}"
+            - proxy_port: "${get_sp('aos_proxy_port')}"
         publish:
           - json: '${return_result}'
         navigate:

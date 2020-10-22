@@ -11,12 +11,14 @@ namespace: AOS.config.api
 flow:
   name: get_parameter
   inputs:
-    - parameter_name: Generate_memory_leak
+    - parameter_name
   workflow:
     - http_client_get:
         do:
           io.cloudslang.base.http.http_client_get:
             - url: "${'%s/catalog/api/v1/DemoAppConfig/parameters/%s' % (get_sp('aos_url'), parameter_name)}"
+            - proxy_host: "${get_sp('aos_proxy_host')}"
+            - proxy_port: "${get_sp('aos_proxy_port')}"
         publish:
           - parameter_json: '${return_result}'
         navigate:

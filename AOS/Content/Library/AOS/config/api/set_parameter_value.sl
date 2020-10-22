@@ -19,6 +19,8 @@ flow:
         do:
           io.cloudslang.base.http.http_client_put:
             - url: "${'%s/catalog/api/v1/DemoAppConfig/update/parameter/%s/value/%s' % (get_sp('aos_url'), parameter_name, parameter_value)}"
+            - proxy_host: "${get_sp('aos_proxy_host')}"
+            - proxy_port: "${get_sp('aos_proxy_port')}"
         publish:
           - result_json: '${return_result}'
         navigate:
