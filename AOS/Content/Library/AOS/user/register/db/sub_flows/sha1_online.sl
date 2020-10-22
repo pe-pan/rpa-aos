@@ -13,6 +13,8 @@ flow:
         do:
           io.cloudslang.base.http.http_client_post:
             - url: 'http://www.sha1-online.com/'
+            - proxy_host: "${get_sp('aos_proxy_host')}"
+            - proxy_port: "${get_sp('aos_proxy_port')}"
             - body: "${'textToHash='+text+'&hash-algorithm-used=sha1'}"
             - content_type: application/x-www-form-urlencoded
         publish:
