@@ -14,7 +14,7 @@ operation:
     - last_name
     - email
   sequential_action:
-    gav: 'com.microfocus.seq:AOS.user.register.ui.register_user_act:1.0.0'
+    gav: 'com.microfocus.seq:AOS.user.register.ui.register_user_act:1.0.4'
     skills:
       - Web
     settings:
